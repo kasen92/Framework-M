@@ -24,25 +24,37 @@
 				var_Dump($array_query);
 			}
 			static function getCont(){
-				return array_shift(self::$query);
+				//return array_shift(self::$query);
+						$res=self::$query[0];
+				array_shift(self::$query);
+				return $res;
 
 			}
 			static function getAct(){
-				return array_shift(self::$query);
+				//return array_shift(self::$query);
+				$res=self::$query[0];
+				array_shift(self::$query);
+				return $res;
 
 			}
 			static function getParams(){
 				if(count(self::$query)>0){
+			$res=array();
+			do{
+				array_push ($res,array(self::$query[0],self::$query[1]));
+				array_shift(self::$query);
+				array_shift(self::$query);
+			}while(count(self::$query)>0);
+			
+			return $res;
 
-					
-				}
-			}
+		}else{}
+	}
+}
 
-/*
-if(count(self::$query)>0){
+/*if(count(self::$query)>0){
 	if((count(self::$query)%2)==0){
 	self::$query;
 	}
 }
 */
-	}
