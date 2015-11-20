@@ -8,12 +8,12 @@
 			//recuperar la request
 				//echo $_server['REQUEST_URI'];
 				Request::retritive();
-
 				$controller=Request::getCont();
-				echo $controller.'<br>';
+				Coder::code($controller);
+				die;
 				$action=Request::getAct();
-				echo $action.'<br>';
+				Coder::code($action);
 				$params=Request::getParams();
-				print_r($params);
+				Coder:codear($params);
 		}
 	}

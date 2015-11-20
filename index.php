@@ -4,14 +4,12 @@
 
 	ini_set('display_errors', 'on');
 
-	define('DS',DIRECTORY_SEPARATOR);
-	define('ROOT',realpath(dirname(__FILE__)).DS);
-	//to acces filesystem
-	define('APP',ROOT.'app'.DS);
-	define('APP_W',basename(dirname($_SERVER['SCRIPT_NAME'])));
-	//it could be in another file
+	//informe d'errors:
+	error_reporting(E_ALL);
+
+	include 'config.php';
 	
-	require ('sys/core.php');
+	require ('sys/helper.php');
 	CORE::init();
 
 
