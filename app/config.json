@@ -1,8 +1,13 @@
 {
-	"driver":"mysql",
-	"dbname":"",
-	"dbhost":"",
-	"dbuser":"",
-	"dbpass":"",
-
+	"dvcibf":{
+		"driver":"mysql",
+		"dbname":"",
+		"dbhost":"",
+		"dbuser":"",
+		"dbpass":"",
+	},
+	"app":{
+		"title":"M",
+		"version":"0.1"
+	}
 }

@@ -1,19 +1,40 @@
 <?php
 	
 	spl_autoload_register(null,false);
-	spl_autoload_register('MAutoload::SysLoad');
+	spl_autoload_register('MAutoload::SysLoader');
+	spl_autoload_register('MAutoload::ContLoader');
+	spl_autoload_register('MAutoload::ViewLoader');
+	spl_autoload_register('MAutoload::ModLoader');
 
 
 	class Mautoload{
-		static function SysLoad($class){
+
+		static function SysLoader($class){
 			$filename=strtolower($class).'.php';
 			$file=ROOT.'sys'.DS.$filename;
-			if(!file_exists($filename)){
+
+			if(!file_exists($file)){
+				return false;
+			}
+			
+			require $file;
+		}
+		static function ContLoader($class){
+			$filename=strtolower($class).'.php';
+			$file=APP.'controllers'.DS.$filename;
+			if(!file_exists($file)){
 				return false;
 			}
 			require $file;
 		}
-
+		static function ViewLoader($class){
+			$filename=strtolower($class).'.php';
+			$file=APP.'views'.DS.$filename;
+			if(!file_exists($file)){
+				return false;
+			}
+			require $file;
+		}
 
 	}
 	/**
