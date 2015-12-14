@@ -8,7 +8,7 @@
 	**/
 
 	class Registry{
-		private $data=Array();
+		private $data=array();
 		// singleton instance
 		static $instance;
 		
@@ -16,60 +16,49 @@
 			//there is no instance
 			if(!(self::$instance instanceof self)){
 				self::$instance=new self();
-				return self::$instance;
+				//return self::$instance;
 			}else{
 				return self::$instance;
 			}
 		}
 
-		function __construct(){
-			$this->data=array();
+	function __construct(){
+		$this->data=array();
+		$this->load_conf();
+	}
+
+	function __set($key,$value){
+		if(!array_key_exists($key, $this->data)){
+			//$this->data = array_merge($this->data, array($key => $value));	
+			$this->data[$key]=$value;
 		}
-		function __construct(){
-			$this->data=array();
-			$this->load_conf();
+	}
+
+	function __get($key){
+		if(array_key_exists($key, $this->data)){
+			return $this->data[$key];	
+		}else{
+			return null;
+		}	
+	}
+
+	function load_conf(){
+		$file=APP.'config.json';
+		$jsonStr=file_get_contents($file);//volcamos el fichero a la variable string
+		$arrayJson=json_decode($jsonStr);//generamos un array asociativo con los datos del string
+		//recorremos el array y lo guardamos en el array data de la clase
+		foreach ($arrayJson as $key => $value){
+			$this->data[$key]=$value;
 		}
+	}
 
-		//methodes __set ($key,$value)
-
-		function __set($key,$value){
-			if(!array_key_exists($key,$this->data)){
-				$this->data[$key]=$value;
-			}
+	function delete($key=null){
+		if($key===null){
+			unset($this->data);
+		}else{
+			unset($this->data[$key]);
 		}
-
-		//methodes __get ($key)
-
-		function __get($key){
-			if(array_key_exists($key,$this->data)){
-				return $this->data[$key];
-			}else{
-				return null;
-			}
-		}
-
-		//esborrar les claus: unset.
-		function __unset($key=null){
-			if(array_key_exists($key, $this->data)){
-				//$idx=array_search($key, $this->data);
-					unset($this->data[$key]);
-			}
-			
-		}
-
-
-
-		function load_conf(){
-			$file=APP.'Config.json';
-			$json_str=file_get_contents($file);
-			Coder::code($json_str);
-			$array_json=json_decode($json_str);
-
-			foreach ($array as $key => $value) {
-				$this->data[$key]=$value;
-			}
-
-		}
+	}
 
 
 

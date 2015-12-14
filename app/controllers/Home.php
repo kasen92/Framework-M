@@ -1,15 +1,12 @@
 <?php 
-	class Home extends Controller{
-		protected $model;
-		protected $view;
+class Home extends Controller{
+	function __construct($params){
+		parent::__construct($params);
+		$this->model=new mHome();
+		$this->view=new vHome($this->model->getData());
+	}
 
-		function __construct(){
-			parent::__construct();
-			$this -> model= new mHome();
-			$this -> view= new vHome();
-			//echo 'Hello controller';
-		}
-	funcion home(){
-		echo 'I\'m the action!';
+	function home(){
+		echo 'I\'m function home in controller home!';
 	}
 }

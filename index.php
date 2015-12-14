@@ -11,21 +11,21 @@
 	require 'sys/helper.php';
 	
 	//session proof
-	Session::init();
+	//Session::init();
 	
 
 
-	//reading configuration
+	/*reading configuration
 	$conf=Registry::getInstance();	
 
 	$conf->welcome='Hola';		//__set
 	$msg=$conf->welcome; 		//__get
-	unset($conf->welcome);
+	unset($conf->welcome);*/
 
 	
-	$conf -> delete(); 
+	/*$conf -> delete(); 
 
-	$conf->time;
+	$conf->time;*/
 	Core::init();
 
 	//Crear class registry per tenir accés.

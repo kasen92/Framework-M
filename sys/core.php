@@ -2,58 +2,57 @@
 	require 'sys/request.php';
 
 
-	class CORE{
+class Core{
+	static private $controller;
+	static private $action;
+	static private $params;
 
-		static private $controller;
-		static private $action;
-
-		static private $contr_call;
-		static private $action_call;
-
-		static function init(){
-			//echo 'Core arrenca app'
-			//recuperar la request
-				//echo $_server['REQUEST_URI'];
-				//extract all the components
-				Request::retrieve();
-				$controller=Request::getCont();
-				self::$controller=$controller;
-				//Coder::code($controller);
-
-				$action=Request::getAct();
-				self::$action=$action;
-				//Coder::code($action);
-				$params=Request::getParams();
-				//Coder:codear($params);
-
-				self::router();
-		}
+	static function init(){
+		//echo 'CORE arrenca app'
+		//recuperar to request
+		//echo $_SERVER['REQUEST_URI'];
+		Request::retrieve();
+		$controller=Request::getCont();
+		$action=Request::getAct();
+		$params=Request::getParams();
+		
+		//mostramos los datos
+		/*coder::code($controller);
+		coder::code($action);
+		coder::codear($params);*/
+		
+		//router
+		self::$controller=$controller;
+		self::$action=$action;
+		self::$params=$params;
+		self::router();
+	}
 
 		static function router(){
 			
 
 			//if exists the controller
 			//fer una instancia del controlador
-			$contr_call=(self::$controller!="")?self::$controller:'home';
-			$action_call=(self::$controller!="")?self::$action:'home';
-			$filename=self::$contr_call.'.php';
-			$filecontroller=APP.'controller'.DS.ucfirst($filename);
-			Coder::code($filecontroller);
+			$controlCall=(self::$controller!="")?self::$controller:'home';//if agrupado
+			$actionCall=(self::$action!="")?self::$action:'home';
+			$paramsCall=(self::$params!=null)?self::$params:array('default'=>'default');
+
+		//comprobamos si existe el fichero del controlador
+		$filename=$controlCall.'.php';
+		$filecontroller=APP.'controllers'.DS.$filename;
 			
-			if(is_readable($filecontroller)){
-				$cont=new self::$contr_call();
-				if(is_callable(array($cont,$action_call)))
-					{
-					call_user_func(array($action_call));
-					
-					Coder::codear($cont);
-				}else{
-					//no function
-					echo 'No action!';
-				}
+			if (is_readable($filecontroller)){
+			$cont=new $controlCall($paramsCall);
+			if (is_callable(array($cont,$actionCall))){
+				call_user_func(array($cont,$actionCall));
+			}else{
+				//no function
+				echo 'No action!';
+			}
 			}else{
 				//No controller
 				echo 'No Controller!';
 				}	
 		}
 	}
+	/* */

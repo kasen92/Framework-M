@@ -1,9 +1,10 @@
 <?php 
 	class controller{	//abstract, no es poden fer instancies
-		protected model;
-		protected view;
+			protected $params;
+			protected $model;
+			protected $view;
 
-		function __construct(){
-
+		function __construct($params){
+		$this->params=$params;
 		}
 	}

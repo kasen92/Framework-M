@@ -1,8 +1,14 @@
-<?php
-	
-	class Home extends Model{
-			function __construct(){
-				parent::__construct();
-				echo 'Model creat';
-		}
-	}
+<?php 
+
+	class mHome {
+        private $data=array();
+        public function __construct() {
+            $this->data=array('logo'=>'logoHome.png','titol'=>'HOME');
+       	}
+
+        public function getData(){
+            return $this->data;
+        }
+    }
+
+?>

@@ -1,10 +1,9 @@
 <?php
-	
+
 	spl_autoload_register(null,false);
 	spl_autoload_register('MAutoload::SysLoader');
 	spl_autoload_register('MAutoload::ContLoader');
 	spl_autoload_register('MAutoload::ViewLoader');
-	spl_autoload_register('MAutoload::ModLoader');
 
 
 	class Mautoload{
